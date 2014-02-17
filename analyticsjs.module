@@ -54,7 +54,6 @@ function analyticsjs_menu() {
  * Implements hook_page_alter().
  */
 function analyticsjs_page_alter(&$page) {
-  global $user;
 
   // Disable tracking for visitors who have opted out via DNT header.
   if (!variable_get('analyticsjs_privacy', 0) && empty($_SERVER['HTTP_DNT'])) {

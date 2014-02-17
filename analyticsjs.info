@@ -3,5 +3,3 @@ description = The hassle-free way to integrate any analytics service into your D
 core = 7.x
 package = Statistics
 configure = admin/config/system/analyticsjs
-files[] = analyticsjs.test
-test_dependencies[] = token
