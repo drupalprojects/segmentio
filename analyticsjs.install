@@ -5,13 +5,12 @@
  * Installation file for Analytics.js.
  */
 
-
 /**
  * Implements hook_install().
  */
 function analyticsjs_install() {
-    // Universal web tracking opt-out &  Compliance with Do Not Track
-    variable_set('analyticsjs_privacy', 0);
+  // Universal web tracking opt-out & Compliance with Do Not Track.
+  variable_set('analyticsjs_privacy', 0);
 }
 
 /**

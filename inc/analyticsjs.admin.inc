@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_admin_settings() for module settings configuration.
+ * Implements hook_admin_settings().
  */
 function analyticsjs_admin_settings_form($form_state) {
   $form['account'] = array(
@@ -38,20 +38,29 @@ function analyticsjs_admin_settings_form($form_state) {
   $pages = variable_get('analyticsjs_pages', ANALYTICSJS_EXCLUSION_LIST);
 
   $form['advanced']['analyticsjs_visibility_pages'] = array(
-      '#type' => 'radios',
-      '#title' => t('Add tracking to specific pages'),
-      '#options' => array(t('Every page except the listed pages'), t('The listed pages only'), ),
-      '#default_value' => $page_tracking,
+    '#type' => 'radios',
+    '#title' => t('Add tracking to specific pages'),
+    '#options' => array(t('Every page except the listed pages'),
+      t('The listed pages only'),
+    ),
+    '#default_value' => $page_tracking,
   );
 
   $form['advanced']['analyticsjs_pages'] = array(
-      '#type' => 'textarea',
-      '#title' => t('Pages'),
-      '#title_display' => 'invisible',
-      '#default_value' => $pages,
-      '#description' => t("Specify pages by using their paths. Enter one path per line. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page.", array('%blog' => 'blog', '%blog-wildcard' => 'blog/*', '%front' => '<front>')),
-      '#rows' => 10,
-    );
+    '#type' => 'textarea',
+    '#title' => t('Pages'),
+    '#title_display' => 'invisible',
+    '#default_value' => $pages,
+    '#description' => t("Specify pages by using their paths. Enter one path per
+      line. The '*' character is a wildcard. Example paths are %blog for the
+      blog page and %blog-wildcard for every personal blog. %front is the front
+      page.", array(
+        '%blog' => 'blog',
+        '%blog-wildcard' => 'blog/*',
+        '%front' => '<front>')
+    ),
+    '#rows' => 10,
+  );
 
   // Privacy configurations.
   $form['advanced']['privacy'] = array(

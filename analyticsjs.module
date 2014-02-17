@@ -5,10 +5,9 @@
  * Drupal Module: Analytics.js
  *
  * Analytics.js is the easiest way to integrate analytics into your Drupal site.
- * By installing Analytics.js's Drupal plugin you can add any analytics service to your site without touching any code.
+ * By installing Analytics.js's Drupal plugin you can add any analytics service 
+ * to your site without touching any code.
  *
- * @author : Gobinath Mallaiyan
- * @D.O URL: https://drupal.org/user/21629
  */
 
 /**
@@ -17,6 +16,9 @@
  */
 define('ANALYTICSJS_EXCLUSION_LIST', "admin\nadmin/*\nbatch\nnode/add*\nnode/*/*\nuser/*/*");
 
+/**
+ * Define default JS.
+ */
 define('ANALYTICSJS_CDN_JS', 'window.analytics||(window.analytics=[]),window.analytics.methods=["identify","track","trackLink","trackForm","trackClick","trackSubmit","page","pageview","ab","alias","ready","group","on","once","off"],window.analytics.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),window.analytics.push(a),window.analytics}};for(var i=0;window.analytics.methods.length>i;i++){var method=window.analytics.methods[i];window.analytics[method]=window.analytics.factory(method)}window.analytics.load=function(t){var a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=("https:"===document.location.protocol?"https://":"http://")+"d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n)},window.analytics.SNIPPET_VERSION="2.0.8",window.analytics.load("ANALYTICSJS_WRITE_KEY");window.analytics.page();');
 
 /**
@@ -49,22 +51,22 @@ function analyticsjs_menu() {
 }
 
 /**
- * Implements hook_page_alter() to insert JavaScript to the appropriate scope/region of the page.
+ * Implements hook_page_alter().
  */
 function analyticsjs_page_alter(&$page) {
   global $user;
 
- // Disable tracking for visitors who have opted out from tracking via DNT (Do-Not-Track) header.
+  // Disable tracking for visitors who have opted out via DNT header.
   if (!variable_get('analyticsjs_privacy', 0) && empty($_SERVER['HTTP_DNT'])) {
     $write_key = variable_get('analyticsjs_write_key', '');
     if (empty($write_key)) {
-      // severity is mentioned as emergency since the analyticsjs system would be usable
+      // Severity is emergency since the analyticsjs system would be usable.
       watchdog('analyticsjs', 'No Write Key has been Configured for Analytics.JS', NULL, WATCHDOG_EMERGENCY);
     }
-    else{
+    else {
       $script = str_replace('ANALYTICSJS_WRITE_KEY', $write_key, ANALYTICSJS_CDN_JS);
 
-      // by default the script gets inserted in header as per https://segment.io/gobinathm/gobinathm/setup/javascript/snippet
+      // By default the script gets inserted in header.
       drupal_add_js($script, array('scope' => 'header', 'type' => 'inline'));
     }
   }
