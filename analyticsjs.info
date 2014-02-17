@@ -1,0 +1,7 @@
+name = Analytics.js
+description = The hassle-free way to integrate any analytics service into your Drupal site.
+core = 7.x
+package = Statistics
+configure = admin/config/system/analyticsjs
+files[] = analyticsjs.test
+test_dependencies[] = token
