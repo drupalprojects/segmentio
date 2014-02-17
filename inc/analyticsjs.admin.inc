@@ -34,36 +34,8 @@ function analyticsjs_admin_settings_form($form_state) {
     '#collapsed' => FALSE,
   );
 
-  $page_tracking = variable_get('analyticsjs_visibility_pages', 0);
-  $pages = variable_get('analyticsjs_pages', ANALYTICSJS_EXCLUSION_LIST);
-
-  $form['advanced']['analyticsjs_visibility_pages'] = array(
-    '#type' => 'radios',
-    '#title' => t('Add tracking to specific pages'),
-    '#options' => array(t('Every page except the listed pages'),
-      t('The listed pages only'),
-    ),
-    '#default_value' => $page_tracking,
-  );
-
-  $form['advanced']['analyticsjs_pages'] = array(
-    '#type' => 'textarea',
-    '#title' => t('Pages'),
-    '#title_display' => 'invisible',
-    '#default_value' => $pages,
-    '#description' => t("Specify pages by using their paths. Enter one path per
-      line. The '*' character is a wildcard. Example paths are %blog for the
-      blog page and %blog-wildcard for every personal blog. %front is the front
-      page.", array(
-        '%blog' => 'blog',
-        '%blog-wildcard' => 'blog/*',
-        '%front' => '<front>')
-    ),
-    '#rows' => 10,
-  );
-
   // Privacy configurations.
-  $form['advanced']['privacy'] = array(
+  $form['advanced']['analyticsjs_privacy'] = array(
     '#type' => 'checkbox',
     '#title' => t('Universal web tracking opt-out'),
     '#description' => t('If enabled and your server receives the <a href="@donottrack">Do-Not-Track</a> header from the client browser, the Google Analytics module will not embed any tracking code into your site. Compliance with Do Not Track could be purely voluntary, enforced by industry self-regulation, or mandated by state or federal law. Please accept your visitors privacy. If they have opt-out from tracking and advertising, you should accept their personal decision. This feature is currently limited to logged in users and disabled page caching.', array('@donottrack' => 'http://donottrack.us/')),

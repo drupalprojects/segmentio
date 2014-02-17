@@ -7,7 +7,6 @@
  * Analytics.js is the easiest way to integrate analytics into your Drupal site.
  * By installing Analytics.js's Drupal plugin you can add any analytics service 
  * to your site without touching any code.
- *
  */
 
 /**
@@ -54,9 +53,13 @@ function analyticsjs_menu() {
  * Implements hook_page_alter().
  */
 function analyticsjs_page_alter(&$page) {
+  $tracking = TRUE;
 
   // Disable tracking for visitors who have opted out via DNT header.
-  if (!variable_get('analyticsjs_privacy', 0) && empty($_SERVER['HTTP_DNT'])) {
+  if (variable_get('analyticsjs_privacy', 1) && !empty($_SERVER['HTTP_DNT'])) {
+    $tracking = FALSE;
+  }
+  if ($tracking) {
     $write_key = variable_get('analyticsjs_write_key', '');
     if (empty($write_key)) {
       // Severity is emergency since the analyticsjs system would be usable.

@@ -10,7 +10,7 @@
  */
 function analyticsjs_install() {
   // Universal web tracking opt-out & Compliance with Do Not Track.
-  variable_set('analyticsjs_privacy', 0);
+  variable_set('analyticsjs_privacy', 1);
 }
 
 /**
