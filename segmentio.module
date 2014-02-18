@@ -31,8 +31,8 @@ function segmentio_permission() {
  */
 function segmentio_menu() {
   $items['admin/config/system/segmentio'] = array(
-    'title' => 'Analytics.js Configuration',
-    'description' => 'Configure <a href="https://segment.io/libraries/analytics.js" target="_blank"><b>Analytics.js</b></a> tracking behavior for your website.',
+    'title' => 'Segmentio Configuration',
+    'description' => 'Configure <a href="https://segment.io/libraries/analytics.js" target="_blank"><b>Segmentio</b></a> tracking behavior for your website.',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('segmentio_admin_settings_form'),
     'access arguments' => array('administer segmentio'),
