@@ -56,7 +56,7 @@ function segmentio_page_alter(&$page) {
   if ($tracking) {
     $write_key = variable_get('segmentio_write_key', '');
     if (empty($write_key)) {
-      // Severity is emergency since the segmentio system would be unusuable.
+      // Severity is emergency since the segmentio system would be unusable.
       watchdog('segmentio', 'No Write Key has been Configured for segmentio', NULL, WATCHDOG_EMERGENCY);
     }
     else {
