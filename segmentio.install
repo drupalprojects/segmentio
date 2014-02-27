@@ -18,7 +18,5 @@ function segmentio_install() {
  */
 function segmentio_uninstall() {
   variable_del('segmentio_write_key');
-  variable_del('segmentio_pages');
-  variable_del('segmentio_visibility_pages');
   variable_del('segmentio_privacy');
 }

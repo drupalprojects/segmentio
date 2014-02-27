@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Drupal Module: Analytics.js
+ * Drupal Module: segmentio
  *
  * segmentio is the easiest way to integrate analytics into your Drupal site.
  * By installing segmentio's Drupal plugin you can add any analytics service
