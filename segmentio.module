@@ -153,3 +153,23 @@ function segmentio_segmentio_node($page = array()) {
 
   return $track;
 }
+
+function segmentio_load_library() {
+  static $static_cache = FALSE;
+
+  $file = 'Segment.php';
+  if (!isset($static_cache[$file])) {
+    $path = libraries_get_path('segmentio');
+    $filepath = $path . '/lib/' . $file;
+
+    if (file_exists($filepath)) {
+      if (include_once($filepath)) {
+        $static_cache[$file] = $filepath;
+
+      }
+    }
+  }
+  Segment::init(variable_get('segmentio_write_key', ''), array("debug" => TRUE));
+
+  return $static_cache[$file];
+}

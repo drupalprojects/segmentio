@@ -20,3 +20,35 @@ function segmentio_uninstall() {
   variable_del('segmentio_write_key');
   variable_del('segmentio_privacy');
 }
+
+
+function segmentio_requirements($phase) {
+  $requirements = array();
+
+  if ($phase == 'runtime') {
+    $t = get_t();
+
+    $libraries = libraries_get_libraries();
+
+    if (
+      array_key_exists('segmentio', $libraries) &&
+      file_exists($libraries['segmentio'] . '/lib/Segment.php')
+    ) {
+      $requirements['segmentio_libraries'] = array(
+        'title' => $t('PHP client for Segment'),
+        'severity' => REQUIREMENT_OK,
+        'value' => $t('PHP client for Segment is Installed.'),
+      );
+    }
+    else {
+      $requirements['segmentio_libraries'] = array(
+        'title' => $t('PHP client for Segment'),
+        'value' => $t('PHP client for Segment is  not installed'),
+        'severity' => REQUIREMENT_ERROR,
+        'description' => $t('PHP client for Segment will not work without installing required library'),
+      );
+    }
+  }
+
+  return $requirements;
+}

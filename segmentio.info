@@ -3,3 +3,4 @@ description = hassle-free way to integrate any analytics service in Drupal site.
 core = 7.x
 package = Statistics
 configure = admin/config/system/segmentio
+dependencies[] = libraries
