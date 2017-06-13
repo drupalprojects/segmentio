@@ -20,7 +20,7 @@ SegmentIO User Account
 Installation
 ------------
  * Install as usual, Copy the 'segmentio' module directory in to your Drupal,
-usually it goes in sites/all/modules.
+usually it goes in modules.
  * Drush installation : use drush dl segmentio
 
 Configuration
