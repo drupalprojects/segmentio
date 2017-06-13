@@ -19,6 +19,7 @@ function segmentio_install() {
 function segmentio_uninstall() {
   variable_del('segmentio_write_key');
   variable_del('segmentio_privacy');
+  variable_del('segmentio_roles_block');
 }
 
 

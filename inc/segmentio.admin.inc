@@ -51,5 +51,14 @@ function segmentio_admin_settings_form($form_state) {
     '#description' => t('Select which additional information should be tracked.'),
   );
 
+  // Tracking enable/disable by Role.
+  $form['advanced']['segmentio_roles_block'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('User Roles to Not Track'),
+    '#options' => user_roles(TRUE),
+    '#default_value' => variable_get('segmentio_roles_block', array()),
+    '#description' => t('Select which user roles to disable tracking for.'),
+  );
+
   return system_settings_form($form);
 }

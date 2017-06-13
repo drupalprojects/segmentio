@@ -53,6 +53,27 @@ function segmentio_page_alter(&$page) {
   if (variable_get('segmentio_privacy', 1) && !empty($_SERVER['HTTP_DNT'])) {
     $tracking = FALSE;
   }
+
+  // Retrieve blocked roles. We only need the checked role ids.
+  $roles = array_values(variable_get('segmentio_roles_block', array()));
+  // Filter to remove empty values.
+  $blocked_roles = array_filter($roles);
+
+  if (count($blocked_roles)) {
+    foreach ($blocked_roles as $rid) {
+      //Ensure we do not ensnare anonymous users by mistake.
+      if ($rid && user_has_role($rid)) {
+        // User has a role, disable tracking.
+        $tracking = FALSE;
+        // No sense in keeping this going.
+        break;
+      }
+    }
+  }
+
+  // Calling all modules implementing hook_segmentio_tracking_alter.
+  drupal_alter('segmentio_tracking', $tracking);
+
   if ($tracking) {
     $write_key = variable_get('segmentio_write_key', '');
     if (empty($write_key)) {
@@ -84,6 +105,9 @@ function segmentio_page_alter(&$page) {
         '!code' => $code,
       );
       $script = format_string(SEGMENTIO_CDN_JS, $args);
+
+      // Calling all modules implementing hook_segmentio_script_alter.
+      drupal_alter('segmentio_script', $script);
 
       // By default the script gets inserted in header.
       drupal_add_js($script, array('scope' => 'header', 'type' => 'inline'));
